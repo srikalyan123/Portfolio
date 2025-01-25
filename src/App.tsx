@@ -10,21 +10,22 @@ import Skills from "./pages/Skills";
 import Experience from "./pages/Experience";
 import Projects from "./pages/Projects";
 import Blog from "./pages/Blog";
+//import viteConfig from '../vite.config.ts';
 
 const queryClient = new QueryClient();
-
+const base = 'portfolio';
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <BrowserRouter>
         <Navigation />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path= {base +"/"} element={<Home />} />
+          <Route path= {base+"/about"} element={<About />} />
+          <Route path={base+"/skills"} element={<Skills />} />
+          <Route path={base+"/experience"} element={<Experience />} />
+          <Route path={base+"/projects"} element={<Projects />} />
+          <Route path={base+"/blog"} element={<Blog />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

@@ -15,25 +15,24 @@ const Blog = () => {
     date: "",
   });
   const [message, setMessage] = useState("");
-
+  const fetchBlogs = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("Porfolio_Blogs") // Match your Supabase table name
+        .select("*")
+        .order("date", { ascending: false });
+      console.log(data, error);
+      if (error) throw error;
+      setBlogs(data || []);
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   // Fetch blogs from Supabase
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("Porfolio_Blogs") // Match your Supabase table name
-          .select("*")
-          .order("date", { ascending: false });
-        console.log(data, error);
-        if (error) throw error;
-        setBlogs(data || []);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+    
     fetchBlogs();
   }, []);
 
@@ -70,7 +69,8 @@ const Blog = () => {
         blog_content: "",
         date: "",
       });
-      setBlogs((prevBlogs) => [data[0], ...prevBlogs]); // Add new blog to the list
+      fetchBlogs();
+      //setBlogs((prevBlogs) => [data[0], ...prevBlogs]); // Add new blog to the list
     } catch (error) {
       console.error("Error submitting blog:", error);
       setMessage("Error submitting blog. Please try again.");

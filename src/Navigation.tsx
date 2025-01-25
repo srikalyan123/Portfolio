@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+//import viteConfig from '../vite.config.ts';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
+  const base = 'portfolio';
   const links = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Skills", path: "/skills" },
-    { name: "Experience", path: "/experience" },
-    { name: "Projects", path: "/projects" },
-    { name: "Blog", path: "/blog" },
+    { name: "Home", path: base+"/" },
+    { name: "About", path: base+"/about" },
+    { name: "Skills", path: base+"/skills" },
+    { name: "Experience", path: base+"/experience" },
+    { name: "Projects", path: base+"/projects" },
+    { name: "Blog", path: base+"/blog" },
   ];
 
   useEffect(() => {
