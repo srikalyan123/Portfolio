@@ -2,23 +2,9 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import React from "react";
 import profile2 from  '../assets/Profile2.jpg';
-interface AboutMeProps {
-  profileImage: {profile2};
-  companyLogoTHC: string;
-  companyLogoNewgen: string;
-  universityImageUTA: string;
-  universityImageAmrita: string;
-  awardImage: string;
-}
 
-const AboutMe: React.FC<AboutMeProps> = ({ 
-  profileImage, 
-  companyLogoTHC, 
-  companyLogoNewgen, 
-  universityImageUTA, 
-  universityImageAmrita, 
-  awardImage 
-}) => {
+
+const About = () => {
   const testimonials = [
     {
       text: "An exceptional engineer who consistently delivers high-quality solutions.",
@@ -95,4 +81,4 @@ const AboutMe: React.FC<AboutMeProps> = ({
   );
 };
 
-export default AboutMe;
+export default About;

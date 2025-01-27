@@ -52,7 +52,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="md:flex space-x-8">
+          <div className="hidden md:flex space-x-8">
             {links.map((link) => (
               <button key={link.name} onClick={() => handleNavigation(link.path)} className={`transition-colors hover:text-blue-600 ${
                   location.pathname === link.path
