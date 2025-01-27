@@ -79,7 +79,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen py-12 bg-gradient-to-br from-background to-muted">
-      <div className="container px-4 md:px-6">
+      <div className="container px-4 md:px-6 mt-20">
         {/* Blog Submission Form */}
         <div className="max-w-3xl mx-auto mb-12">
           <h1 className="text-4xl font-bold text-center mb-8">Submit a Blog</h1>

@@ -27,7 +27,7 @@ const Skills = () => {
 
   return (
     <div className="min-h-screen py-12 bg-gradient-to-br from-background to-muted">
-      <div className="container px-4 md:px-6">
+      <div className="container px-4 md:px-6 mt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

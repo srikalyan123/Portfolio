@@ -1,7 +1,24 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import React from "react";
+import profile2 from  '../assets/Profile2.jpg';
+interface AboutMeProps {
+  profileImage: {profile2};
+  companyLogoTHC: string;
+  companyLogoNewgen: string;
+  universityImageUTA: string;
+  universityImageAmrita: string;
+  awardImage: string;
+}
 
-const About = () => {
+const AboutMe: React.FC<AboutMeProps> = ({ 
+  profileImage, 
+  companyLogoTHC, 
+  companyLogoNewgen, 
+  universityImageUTA, 
+  universityImageAmrita, 
+  awardImage 
+}) => {
   const testimonials = [
     {
       text: "An exceptional engineer who consistently delivers high-quality solutions.",
@@ -19,63 +36,63 @@ const About = () => {
 
   return (
     <div className="min-h-screen py-12 bg-gradient-to-br from-background to-muted">
-      <div className="container px-4 md:px-6">
+      <div className="container px-4 md:px-6 mt-10">
+      <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl text-center">About Me</h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="space-y-8"
         >
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">About Me</h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              A passionate software engineer with expertise in designing and developing creative solutions
-              using advanced technologies.
+          
+          <div className="mb-6 mt-5 flex">
+              <p className="text-gray-700 leading-relaxed">
+                I am a dedicated Software Engineer with expertise in Azure Cloud, .NET Core, and modern web technologies. With a strong background in software design, development, and optimization, I have consistently delivered high-performing and scalable applications that enhance user experience and operational efficiency.
+              </p>
+              
+          </div>
+
+          {/* Current Role */}
+          <div className="mb-6 flex">
+            
+            <div>
+              <p className="text-gray-700">
+                Currently, I am working as a Software Engineer at THC, where I have integrated Azure Cloud for seamless deployment, significantly reduced deployment times, and optimized system performance. My passion for continuous improvement drives me to leverage the latest technologies, such as React, .NET Core, Jenkins, and Terraform.
+              </p>
+              <p className="text-gray-700">
+                Previously, at Newgen Software Technologies, I contributed to optimizing backend performance, enhancing system scalability, and integrating machine learning models and APIs. I was proud to be part of key projects that reduced downtime and improved system reliability.
+              </p>
+              </div>
+              
+          </div>
+
+          <div className="mb-6">
+            <p className="text-gray-700">
+              My academic background includes a Master’s in Computer Science from the University of Texas at Arlington.
+            </p>
+            <p className="text-gray-700">
+              I also hold a Bachelor's in Computer Science from Amrita Vishwa Vidyapeetham.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Education</h3>
-              <ul className="space-y-2">
-                <li>Master's in Computer Science - University of Texas at Arlington</li>
-                <li>Bachelor's in Computer Science - Amrita Vishwa Vidyapeetham</li>
-              </ul>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Experience Highlights</h3>
-              <ul className="space-y-2">
-                <li>Software Engineer at THC</li>
-                <li>Software Design Engineer at Newgen Software Technologies</li>
-                <li>Intern at Newgen Software Technologies</li>
-              </ul>
-            </Card>
-
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Achievements</h3>
-              <ul className="space-y-2">
-                <li>Excellence Award at Newgen Software Technologies</li>
-                <li>Recognition for Intelligent IDXtract development</li>
-              </ul>
-            </Card>
+          <div className="mb-6">
+            <p className="text-gray-700">
+                I have been recognized for my contributions with the Excellence Award at Newgen Software Technologies, reflecting my commitment to technical excellence.
+              </p>
           </div>
+            {/* <img
+                src={companyLogoTHC}
+                alt="THC Logo"
+                className="w-16 h-16 object-contain rounded-lg"
+              />
+            </div> */}
 
-          <div className="mt-16">
-            <h2 className="text-3xl font-bold text-center mb-8">What Others Say</h2>
-            <div className="flex space-x-4 testimonial-scroll">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="p-6 min-w-[300px]">
-                  <p className="italic mb-4">{testimonial.text}</p>
-                  <p className="text-sm text-muted-foreground">- {testimonial.author}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
+          {/* Awards */}
+          
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default About;
+export default AboutMe;

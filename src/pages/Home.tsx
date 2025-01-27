@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import profile from '../assets/profile.jpg';
 
 const Home = () => {
   const navigate = useNavigate();
-
+  const base = 'portfolio';
   const scrollToBlog = () => {
     navigate('/blog');
-    // Add a small delay to ensure navigation completes before scrolling
     setTimeout(() => {
       window.scrollTo({
         top: 0,
@@ -18,45 +18,25 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-6 items-center">
-          <div className="flex flex-col justify-center space-y-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text bg-gradient-to-r from-primary to-primary-foreground">
-                Software Engineer & Technology Enthusiast
-              </h1>
-              <p className="max-w-[600px] text-muted-foreground mx-auto mt-4 text-xl">
-                Passionate about creating innovative solutions using advanced technologies
-                and collaborating with talented engineers to deliver high-quality products.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="space-x-4"
-            >
-              <Button
-                onClick={() => navigate("/about")}
-                className="bg-primary hover:bg-primary/90"
-              >
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button
-                onClick={scrollToBlog}
-                variant="outline"
-                className="hover:bg-primary/5"
-              >
-                View Stories <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </motion.div>
-          </div>
-        </div>
+    <div className="min-h-screen py-12 bg-gradient-to-br from-background to-muted">
+      <div className="flex flex-col items-center text-center mt-10">
+        <img src= {profile}
+          alt="Sri Kalyan"
+          className="w-40 h-40 rounded-full border-4 border-blue-400 shadow-lg mb-6"
+        />
+        <h2 className="text-5xl font-bold leading-tight">I’m Sri Kalyan</h2>
+          {/* <span className="text-blue-400">Software Developer</span> */}
+        <p className="text-gray-400 mt-4 max-w-xl">
+        I am a passionate Software Developer with expertise in designing, building, and deploying cloud-native applications. With a focus on delivering scalable, secure, and efficient solutions, I specialize in utilizing modern frameworks and cloud platforms to bring innovative ideas to application.
+        </p>
+        {/* <div className="mt-8 flex space-x-6">
+          <a href={base+"/about"} className="px-6 py-3 bg-blue-500 text-lg font-semibold rounded-lg shadow hover:bg-blue-600 transition">
+            Discover My Journey
+          </a>
+          <a href={base+"/experience"} className="px-6 py-3 text-white bg-gray-800 border border-gray-600 text-lg font-semibold rounded-lg hover:bg-gray-700 transition">
+            Explore My Work
+          </a>
+        </div> */}
       </div>
     </div>
   );
