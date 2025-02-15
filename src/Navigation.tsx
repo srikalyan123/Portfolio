@@ -1,39 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-scroll";
 import { Menu, X } from "lucide-react";
-//import viteConfig from '../vite.config.ts';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const base = 'portfolio';
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const base = "/portfolio";
+
   const links = [
-    { name: "Home", path: base+"/" },
-    { name: "About", path: base+"/about" },
-    { name: "Skills", path: base+"/skills" },
-    { name: "Experience", path: base+"/experience" },
-    { name: "Projects", path: base+"/projects" },
-    { name: "Blog", path: base+"/blog" },
+    { name: "Home", path: "home" },
+    { name: "About", path: "about" },
+    { name: "Skills", path: "skills" },
+    { name: "Experience", path: "experience" },
+    { name: "Projects", path: "projects" },
+    { name: "Resume", path: "resume" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    setIsOpen(false);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav
@@ -45,7 +50,7 @@ const Navigation = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div
-            onClick={() => handleNavigation("/")}
+            onClick={() => navigate("/")}
             className="text-2xl font-bold tracking-tight text-gray-800 hover:opacity-80 transition-opacity cursor-pointer"
           >
             Portfolio
@@ -54,14 +59,17 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {links.map((link) => (
-              <button key={link.name} onClick={() => handleNavigation(link.path)} className={`transition-colors hover:text-blue-600 ${
-                  location.pathname === link.path
-                    ? "text-blue-600 font-medium"
-                    : "text-gray-700"
-                }`}
+              <Link
+                key={link.name}
+                to={link.path}
+                smooth={true}
+                duration={500}
+                spy={true}
+                activeClass="text-blue-600 font-medium"
+                className="cursor-pointer transition-colors hover:text-blue-600 text-gray-700"
               >
                 {link.name}
-              </button>
+              </Link>
             ))}
           </div>
 
@@ -81,20 +89,23 @@ const Navigation = () => {
 
         {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg animate-fade-in">
+          <div
+            ref={menuRef}
+            className="md:hidden absolute top-16 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg animate-fade-in"
+          >
             <div className="px-4 py-3 space-y-2">
               {links.map((link) => (
-                <button
+                <Link
                   key={link.name}
-                  onClick={() => handleNavigation(link.path)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    location.pathname === link.path
-                      ? "text-blue-600 bg-blue-50"
-                      : "text-gray-800 hover:bg-blue-50"
-                  }`}
+                  to={link.path}
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors text-gray-800 hover:bg-blue-50"
+                  onClick={() => setIsOpen(false)}
                 >
                   {link.name}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
